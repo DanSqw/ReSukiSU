@@ -367,8 +367,9 @@ clean:
     filp_close(fp, 0);
 
     if (v2_signing_valid && (v3_signing_exist || v3_1_signing_exist)) {
-        pr_err("Unexpected v3 signature scheme found!\n");
-        return false;
+#ifdef CONFIG_KSU_DEBUG
+        pr_info("v3/v3.1 signature scheme present alongside v2\n");
+#endif
     }
 
     if (v2_signing_valid) {
